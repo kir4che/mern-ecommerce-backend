@@ -1,6 +1,7 @@
 import "dotenv/config";
 import app from "./app";
 import { connectDB } from "./config/db";
+import { ensureDemoUser } from "./config/demo-user";
 import { startCancelExpiredOrdersJob } from "./jobs/cancelExpiredOrders";
 
 const port = process.env.PORT || 8080;
@@ -9,6 +10,7 @@ const isDev = process.env.NODE_ENV !== "production";
 async function start() {
   try {
     await connectDB();
+    await ensureDemoUser();
     app.listen(port, () => {
       if (isDev)
         console.log(`[INFO] Server started on http://localhost:${port}`);
