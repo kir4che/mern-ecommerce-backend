@@ -54,7 +54,7 @@ interface FinalizeResult {
 const getRequiredEnv = (key: string): string => {
   const value = process.env[key];
   if (!value) throw new Error("PAYMENT_CONFIG_MISSING");
-  return value;
+  return value.trim();
 };
 
 // 載入可付款的訂單，並驗證權限與訂單狀態。
